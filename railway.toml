@@ -1,0 +1,14 @@
+# OpenClaw Railway deployment configuration
+# Docs: https://docs.railway.app/reference/config-as-code
+
+[build]
+dockerfilePath = "Dockerfile"
+
+[deploy]
+# Keep running for persistent connections (WhatsApp, Telegram, etc.)
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+# Start command - runs setup script to create config, then starts gateway
+# Railway auto-injects $PORT
+startCommand = "node scripts/railway-start.mjs"
