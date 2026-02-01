@@ -27,14 +27,11 @@ const config = {
   },
   gateway: {
     mode: "local",
-    auth: {
-      mode: process.env.OPENCLAW_GATEWAY_TOKEN ? "token" : "none",
-      ...(process.env.OPENCLAW_GATEWAY_TOKEN && {
-        token: process.env.OPENCLAW_GATEWAY_TOKEN,
-      }),
-    },
+    auth: process.env.OPENCLAW_GATEWAY_TOKEN
+      ? { mode: "token", token: process.env.OPENCLAW_GATEWAY_TOKEN }
+      : undefined,
     port: parseInt(process.env.PORT || "18789", 10),
-    bind: "all", // Railway needs external access
+    bind: "lan", // 0.0.0.0 - Railway needs external access
   },
   auth: {
     profiles: {
